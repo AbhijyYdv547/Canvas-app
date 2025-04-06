@@ -35,10 +35,6 @@ app.post("/signup",async (req,res)=>{
             message:"User already exists with this username"
         })
     }
-    
-
-    
-
 })
 
 app.post("/signin",async (req,res)=>{
