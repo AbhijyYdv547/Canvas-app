@@ -86,7 +86,6 @@ Learn more about the power of Turborepo:
 
 ## Assignment
 complete pencil functionality
-add panning and zooming functionality
 signup and signin endpoint
 dashboard 
 ui polish

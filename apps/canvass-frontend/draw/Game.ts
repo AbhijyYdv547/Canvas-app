@@ -13,12 +13,9 @@ type Shape = {
     centerY: number;
     radius: number
 } | {
-    type: "pencil";
-    startX: number;
-    startY: number;
-    endX: number;
-    endY: number;
-}
+    type: "pencil",
+    points: { x: number, y: number }[]
+} 
 
 export class Game {
 
@@ -40,6 +37,9 @@ export class Game {
     private dragStart = { x: 0, y: 0 }
     private lastZoom = this.cameraZoom
     private initialPinchDistance: number | null = null
+    private currentPencil: { type: "pencil", points: { x: number, y: number }[] } | null = null;
+
+
 
 
     constructor(canvas: HTMLCanvasElement, roomId: string, socket: WebSocket) {
@@ -62,7 +62,7 @@ export class Game {
         this.canvas.removeEventListener("mousemove", this.mouseMoveHandler)
     }
 
-    setTool(tool: "circle" | "pencil" | "rect") {
+    setTool(tool: "circle" | "pencil" | "rect" ) {
         this.selectedTool = tool;
     }
 
@@ -85,13 +85,13 @@ export class Game {
 
     clearCanvas() {
 
-        this.ctx.save(); // Save the current transformation state
+        this.ctx.save();
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.fillStyle = "rgba(0,0,0)";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Apply camera transform BEFORE drawing
+
         this.ctx.translate(this.cameraOffset.x, this.cameraOffset.y);
         this.ctx.scale(this.cameraZoom, this.cameraZoom);
 
@@ -105,7 +105,18 @@ export class Game {
                 this.ctx.arc(shape.centerX, shape.centerY, Math.abs(shape.radius), 0, Math.PI * 2);
                 this.ctx.stroke()
                 this.ctx.closePath()
+            } else if (shape.type === "pencil") {
+                this.ctx.beginPath();
+                for (let i = 0; i < shape.points.length - 1; i++) {
+                    const p1 = shape.points[i];
+                    const p2 = shape.points[i + 1];
+                    this.ctx.moveTo(p1.x, p1.y);
+                    this.ctx.lineTo(p2.x, p2.y);
+                }
+                this.ctx.stroke();
+                this.ctx.closePath();
             }
+
         })
         this.ctx.restore();
     }
@@ -116,6 +127,14 @@ export class Game {
         const { x, y } = this.getTransformedMousePos(e.clientX, e.clientY);
         this.startX = x
         this.startY = y
+
+        if (this.selectedTool === "pencil") {
+            this.currentPencil = {
+                type: "pencil",
+                points: [{ x: x, y: y }]
+            };
+        }
+
     }
 
     mouseUpHandler = (e) => {
@@ -143,7 +162,12 @@ export class Game {
                 centerX: this.startX + radius,
                 centerY: this.startY + radius
             }
+        } else if (this.selectedTool === "pencil" && this.currentPencil) {
+            this.existingShapes.push(this.currentPencil);
+            this.socket.send(JSON.stringify({ type: "chat", message: JSON.stringify({ shape: this.currentPencil }), roomId: this.roomId }));
+            this.currentPencil = null;
         }
+
 
         if (!shape) {
             return;
@@ -184,7 +208,13 @@ export class Game {
                 this.ctx.arc(centerX, centerY, Math.abs(radius), 0, Math.PI * 2);
                 this.ctx.stroke()
                 this.ctx.closePath()
+            } else if (this.selectedTool === "pencil" && this.clicked && this.currentPencil) {
+                this.currentPencil.points.push({ x: x, y: y });
+                this.previewCurrentStroke();
+            }else if(this.selectedTool === "eraser"){
+
             }
+
             this.ctx.restore();
         }
     }
@@ -244,7 +274,8 @@ export class Game {
         }
     }
 
-    adjustZoom(zoomAmount: number, zoomFactor: number|null,zoomCenter: { x: any; y: any; } | undefined) {
+    adjustZoom(zoomAmount: number, zoomFactor: number | null, zoomCenter: { x: any; y: any; } | undefined) {
+        
         if (!this.isDragging) {
             const oldZoom = this.cameraZoom;
             if (zoomAmount) {
@@ -260,12 +291,12 @@ export class Game {
 
             if (zoomCenter) {
 
-            const dx = zoomCenter.x - this.cameraOffset.x;
-            const dy = zoomCenter.y - this.cameraOffset.y;
+                const dx = zoomCenter.x - this.cameraOffset.x;
+                const dy = zoomCenter.y - this.cameraOffset.y;
 
-            this.cameraOffset.x -= dx * (this.cameraZoom / oldZoom - 1);
-            this.cameraOffset.y -= dy * (this.cameraZoom / oldZoom - 1);
-        }
+                this.cameraOffset.x -= dx * (this.cameraZoom / oldZoom - 1);
+                this.cameraOffset.y -= dy * (this.cameraZoom / oldZoom - 1);
+            }
 
             console.log(zoomAmount)
             this.clearCanvas();
@@ -273,11 +304,10 @@ export class Game {
     }
 
     mouseScrollHandler = (e) => {
-    e.preventDefault(); 
-    const zoomCenter = { x: e.clientX, y: e.clientY };
-    this.adjustZoom(e.deltaY * this.SCROLL_SENSITIVITY, null, zoomCenter);
-}
-
+        e.preventDefault();
+        const zoomCenter = this.getTransformedMousePos(e.clientX, e.clientY);
+        this.adjustZoom(e.deltaY * this.SCROLL_SENSITIVITY, null, zoomCenter);
+    }
 
     initMouseHandlers() {
         this.canvas.addEventListener("mousedown", this.mouseDownHandler)
@@ -295,5 +325,24 @@ export class Game {
             y: (y - this.cameraOffset.y) / this.cameraZoom
         };
     };
+
+    previewCurrentStroke() {
+         this.clearCanvas(); 
+  if (this.currentPencil && this.currentPencil.type === "pencil") {
+    this.ctx.beginPath();
+    const points = this.currentPencil.points;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      this.ctx.moveTo(p1.x, p1.y);
+      this.ctx.lineTo(p2.x, p2.y);
+    }
+    this.ctx.stroke();
+    this.ctx.closePath();
+  }
+}
+
+
+
 
 }
