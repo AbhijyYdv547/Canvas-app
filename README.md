@@ -85,7 +85,7 @@ Learn more about the power of Turborepo:
 
 
 ## Assignment
-complete pencil functionality
+
 signup and signin endpoint
 dashboard 
 ui polish
