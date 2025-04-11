@@ -1,92 +1,109 @@
-# Turborepo starter
 
-This Turborepo starter is maintained by the Turborepo core team.
+# 🖌️ Collaborative Canvas App
 
-## Using this example
+A real-time collaborative drawing application where users can sign up, log in, create or join rooms, and draw together using pencil, rectangles, and circles. Built with a scalable monorepo structure using modern full-stack technologies.
 
-Run the following command:
+## 🚀 Features
 
-```sh
-npx create-turbo@latest
+- 🔐 User authentication (Signup/Login)
+- 🎨 Drawing tools: Pencil, Rectangle, Circle
+- 🔁 Real-time collaboration via WebSocket (`ws`)
+- 📦 Monorepo setup with Turborepo
+- 🧭 Zoom and pan support on the canvas
+- 🪄 Smooth animations using Framer Motion
+- 🌐 Backend with Node.js, Express, PostgreSQL, and Prisma ORM
+- 🎨 Frontend with Next.js, Tailwind CSS, HTML Canvas
+
+## 📸 Screenshots
+Landing page
+![5](https://github.com/user-attachments/assets/d329d9c1-d342-41c6-a343-3a6cd9d0b18e)
+Signup and Signin page
+![1](https://github.com/user-attachments/assets/3fb0f26f-3738-41a9-8359-e9797429946a)
+Dashboard
+![2](https://github.com/user-attachments/assets/fbfd66fc-1d99-4ed0-905d-0f7364309867)
+Join room 
+![3](https://github.com/user-attachments/assets/9f61e44a-9c84-4c94-9fed-521804a44f8c)
+Collaborative canvas
+![4](https://github.com/user-attachments/assets/281b8ea2-bbbb-4090-a50d-ca26d07ab0ff)
+
+
+## 🧰 Tech Stack
+
+### Frontend
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [HTML Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+- [Framer Motion](https://www.framer.com/motion/)
+
+### Backend
+
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Prisma ORM](https://www.prisma.io/)
+
+### Others
+
+- [WebSocket (`ws`)](https://github.com/websockets/ws)
+- [Turborepo](https://turbo.build/repo)
+- [Postman](https://www.postman.com/) (for API testing)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## 🛠️ Getting Started
+
+```bash
+# Clone the repository
+git clone (https://github.com/AbhijyYdv547/Canvas-app
+cd Canvas-app
+
+# Install dependencies
+pnpm install
+
+# Run dev server
+pnpm run dev
 ```
 
-## What's inside?
+> Make sure you have PostgreSQL running and your `.env` is configured with the database URL.
 
-This Turborepo includes the following packages/apps:
+## 📦 Scripts
 
-### Apps and Packages
+| Script             | Description               |
+|--------------------|---------------------------|
+| `pnpm run dev`     | Run development servers   |
+| `pnpm build`       | Build all packages/apps   |
+| `pnpm lint`        | Lint the codebase         |
+| `pnpm format`      | Format code using Prettier|
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## 🗂️ Folder Structure
 
 ```
-cd my-turborepo
-pnpm build
+apps/
+  ├── canvass-frontend/         # Next.js frontend
+  ├── http-backend/        # HTTP backend
+  ├── ws-backend/        # Websocket backend
+packages/
+  ├── backend-common/          # Shared Backend components
+  ├── common/          # Shared types components
+  ├── db/          # Shared DB components
+  ├── ui/          # Shared UI components
+  ├── eslint-config/
+  ├── typescript-config/
 ```
 
-### Develop
+## ✅ TODOs
 
-To develop all apps and packages, run the following command:
+- [ ] Add text support on canvas
+- [ ] Polish dashboard UI
+- [ ] Deploy backend and frontend
 
-```
-cd my-turborepo
-pnpm dev
-```
+## 📬 Feedback or Collaboration
 
-### Remote Caching
+Wanna contribute or give feedback? Feel free to open an issue or contact me:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+- 📫 Email: yadavabhjay@gmail.com
+- 🌐 [Portfolio](#)
+- 💼 [LinkedIn](https://linkedin.com/in/abj-ydv)
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+---
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
-
-
-## Assignment
-
-signup and signin endpoint
-dashboard 
-ui polish
-add text functionality
