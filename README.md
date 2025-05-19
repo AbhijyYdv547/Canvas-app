@@ -15,15 +15,15 @@ A real-time collaborative drawing application where users can sign up, log in, c
 - 🎨 Frontend with Next.js, Tailwind CSS, HTML Canvas
 
 ## 📸 Screenshots
-Landing page
+## Landing page
 ![5](https://github.com/user-attachments/assets/d329d9c1-d342-41c6-a343-3a6cd9d0b18e)
-Signup and Signin page
+## Signup and Signin page
 ![1](https://github.com/user-attachments/assets/3fb0f26f-3738-41a9-8359-e9797429946a)
-Dashboard
+## Dashboard
 ![2](https://github.com/user-attachments/assets/fbfd66fc-1d99-4ed0-905d-0f7364309867)
-Join room 
+## Join room 
 ![3](https://github.com/user-attachments/assets/9f61e44a-9c84-4c94-9fed-521804a44f8c)
-Collaborative canvas
+## Collaborative canvas
 ![4](https://github.com/user-attachments/assets/281b8ea2-bbbb-4090-a50d-ca26d07ab0ff)
 
 
