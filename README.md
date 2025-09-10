@@ -1,20 +1,20 @@
 
-# 🖌️ Collaborative Canvas App
+# Collaborative Canvas App
 
 A real-time collaborative drawing application where users can sign up, log in, create or join rooms, and draw together using pencil, rectangles, and circles. Built with a scalable monorepo structure using modern full-stack technologies.
 
-## 🚀 Features
+## Features
 
-- 🔐 User authentication (Signup/Login)
-- 🎨 Drawing tools: Pencil, Rectangle, Circle
-- 🔁 Real-time collaboration via WebSocket (`ws`)
-- 📦 Monorepo setup with Turborepo
-- 🧭 Zoom and pan support on the canvas
-- 🪄 Smooth animations using Framer Motion
-- 🌐 Backend with Node.js, Express, PostgreSQL, and Prisma ORM
-- 🎨 Frontend with Next.js, Tailwind CSS, HTML Canvas
+- User authentication (Signup/Login)
+- Drawing tools: Pencil, Rectangle, Circle
+- Real-time collaboration via WebSocket (`ws`)
+- Monorepo setup with Turborepo
+- Zoom and pan support on the canvas
+- Smooth animations using Framer Motion
+- Backend with Node.js, Express, PostgreSQL, and Prisma ORM
+- Frontend with Next.js, Tailwind CSS, HTML Canvas
 
-## 📸 Screenshots
+## Screenshots
 ## Landing page
 ![5](https://github.com/user-attachments/assets/d329d9c1-d342-41c6-a343-3a6cd9d0b18e)
 ## Signup and Signin page
@@ -27,7 +27,7 @@ A real-time collaborative drawing application where users can sign up, log in, c
 ![4](https://github.com/user-attachments/assets/281b8ea2-bbbb-4090-a50d-ca26d07ab0ff)
 
 
-## 🧰 Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -50,7 +50,7 @@ A real-time collaborative drawing application where users can sign up, log in, c
 - [Postman](https://www.postman.com/) (for API testing)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## 🛠️ Getting Started
+## Getting Started
 
 ```bash
 # Clone the repository
@@ -66,7 +66,7 @@ pnpm run dev
 
 > Make sure you have PostgreSQL running and your `.env` is configured with the database URL.
 
-## 📦 Scripts
+## Scripts
 
 | Script             | Description               |
 |--------------------|---------------------------|
@@ -75,7 +75,7 @@ pnpm run dev
 | `pnpm lint`        | Lint the codebase         |
 | `pnpm format`      | Format code using Prettier|
 
-## 🗂️ Folder Structure
+## Folder Structure
 
 ```
 apps/
@@ -91,19 +91,19 @@ packages/
   ├── typescript-config/
 ```
 
-## ✅ TODOs
+## TODOs
 
 - [ ] Add text support on canvas
 - [ ] Polish dashboard UI
 - [ ] Deploy backend and frontend
 
-## 📬 Feedback or Collaboration
+## Feedback or Collaboration
 
 Wanna contribute or give feedback? Feel free to open an issue or contact me:
 
-- 📫 Email: yadavabhjay@gmail.com
-- 🌐 [Portfolio](#)
-- 💼 [LinkedIn](https://linkedin.com/in/abj-ydv)
+- Email: yadavabhjay@gmail.com
+- [Portfolio](https://portfolio1-two-xi.vercel.app)
+- [LinkedIn](https://linkedin.com/in/abj-ydv)
 
 ---
 
